@@ -11,11 +11,13 @@ namespace Business.Abstract
         List<Car> GetAll();
 
         //-8.Hafta-Odev.1-Madde.6...
-        void Add(Car car);
+        void Insert(Car car);
         //------------------
         List<Car> GetCarsByBrandId(int BrandId);
         List<Car> GetCarsByColorId(int ColorId);
         List<CarDetailDto> GetCarDetails();
+        void Delete(Car car);
+        void Update(Car car);
 
 
     }

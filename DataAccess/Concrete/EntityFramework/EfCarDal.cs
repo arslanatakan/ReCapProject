@@ -18,8 +18,10 @@ namespace DataAccess.Concrete.EntityFramework
             using (AtaDataContext context = new AtaDataContext())
             {
                 var result = from c in context.Cars
-                             join b in context.Brands
+                             join b in context.Brands                          
                              on c.BrandId equals b.BrandId
+                             join k in context.Colors
+                             on c.ColorId equals k.ColorId
                              select new CarDetailDto
                              {
                                  CarId = c.CarId,
@@ -29,7 +31,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorId = c.ColorId,
                                  BrandId = c.BrandId,
                                  Description = c.Description,
-                                 ModelYear = c.ModelYear
+                                 ModelYear = c.ModelYear,
+                                 ColorName = k.ColorName
                              };
                 return result.ToList();
             }
