@@ -9,6 +9,7 @@ namespace Business.Abstract
     public interface ICarService
     {
         List<Car> GetAll();
+        Car GetById(int carId);
 
         //-8.Hafta-Odev.1-Madde.6...
         void Insert(Car car);
