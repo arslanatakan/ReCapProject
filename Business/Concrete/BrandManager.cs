@@ -16,6 +16,11 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
+        public void Delete(Brand brand)
+        {
+            _brandDal.Delete(brand);
+        }
+
         public List<Brand> GetAll()
         {
             //İş kodlarımızın yazılacağı yer.
@@ -25,6 +30,16 @@ namespace Business.Concrete
         public Brand GetById(int brandId)
         {
             return _brandDal.Get(b => b.BrandId == brandId);
+        }
+
+        public void Insert(Brand brand)
+        {
+            _brandDal.Insert(brand);
+        }
+
+        public void Update(Brand brand)
+        {
+            _brandDal.Update(brand);
         }
     }
 }

@@ -12,31 +12,87 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
-            //BrandTest();
-            //CarManager carManager = new CarManager(new EfCarDal());
-            //CarInsertDeleteUpdateTest(carManager);
+            //CarListTest();
+            //BrandListTest();           
+            //ColorListTest();
+            //------------------------//
+            //ColorCRUDTest();
+            //BrandCRUDTest();
+            //CarCRUDTest();
 
+
+        }
+
+        private static void ColorListTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Console.WriteLine(colorManager.GetColor(5).ColorName);
+        }
+
+        private static void CarCRUDTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            Car car6 = new Car
+            {
+                CarName = "Fiat Kartal",
+                CarId = 1006,
+                ColorId = 2,
+                BrandId = 2,
+                DailyPrice = 200,
+                Description = "5 Seats and Manual",
+                ModelYear = 1996
+            };
+            carManager.Insert(car6);
+        }
+
+        private static void BrandCRUDTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            Brand brand6 = new Brand
+            {
+                BrandId = 1002,
+                BrandName = "Volkswagen"
+            };
+            brandManager.Delete(brand6);
+        }
+
+        private static void ColorCRUDTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Color color6 = new Color
+            {
+                ColorId = 1002,
+                ColorName = "Blue"
+            };
+            Color color7 = new Color
+            {
+                ColorId = 1003,
+                ColorName = "Blue"
+            };
+            //colorManager.Insert(color7);
+            colorManager.Update(color6);
         }
 
         private static void CarInsertDeleteUpdateTest(CarManager carManager)
         {
+            
             Car car6 = new Car
             {
                 CarName = "Fiat Kartal",
-                CarId = 9,
+                CarId = 1006,
                 ColorId = 2,
                 BrandId = 2,
                 DailyPrice = 200,
-                Description = "Ideal for 2 people",
-                ModelYear = 2006
+                Description = "5 Seats and Manual",
+                ModelYear = 1996
             };
+            //Insert yaparken CarId vermemeye dikkat et! Data kısmında oto. artan ayarladın.
             //carManager.Insert(car6);
-            carManager.Update(car6);
-            
+            //carManager.Update(car6);
+            //carManager.Delete(car6);
         }
 
-        private static void BrandTest()
+        private static void BrandListTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             foreach (var brand in brandManager.GetAll())
@@ -45,7 +101,7 @@ namespace ConsoleUI
             }
         }
 
-        private static void CarTest()
+        private static void CarListTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
