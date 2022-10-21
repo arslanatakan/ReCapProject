@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Business.Constants;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -12,7 +13,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarListTest();
+            CarListTest();
             //BrandListTest();           
             //ColorListTest();
             //------------------------//
@@ -26,7 +27,7 @@ namespace ConsoleUI
         private static void ColorListTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            Console.WriteLine(colorManager.GetColor(5).ColorName);
+            Console.WriteLine(colorManager.GetColor(5).Data);
         }
 
         private static void CarCRUDTest()
@@ -86,7 +87,7 @@ namespace ConsoleUI
                 Description = "5 Seats and Manual",
                 ModelYear = 1996
             };
-            //Insert yaparken CarId vermemeye dikkat et! Data kısmında oto. artan ayarladın.
+            //***Insert yaparken CarId vermemeye dikkat et! Data kısmında oto. artan ayarladın.***
             //carManager.Insert(car6);
             //carManager.Update(car6);
             //carManager.Delete(car6);
@@ -95,7 +96,7 @@ namespace ConsoleUI
         private static void BrandListTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -104,12 +105,20 @@ namespace ConsoleUI
         private static void CarListTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success==true)
             {
-                Console.WriteLine(car.CarName + " /" + car.BrandName + "/" 
-                    + car.ColorName + " /" + car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " /" + car.BrandName + "/"
+                        + car.ColorName + " /" + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
     }
 }
