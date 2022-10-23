@@ -29,6 +29,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
+        public IDataResult<Rental> GetById(int rentalId)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == rentalId));
+        }
+
         public IResult Insert(Rental rental)
         {
             if (rental.ReturnDate==null)

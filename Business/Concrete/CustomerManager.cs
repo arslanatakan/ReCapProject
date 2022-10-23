@@ -28,6 +28,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
         }
 
+        public IDataResult<Customer> GetById(int customerId)
+        {
+            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.CustomerId==customerId));
+        }
+
         public IResult Insert(Customer customer)
         {
             _customerDal.Insert(customer);
